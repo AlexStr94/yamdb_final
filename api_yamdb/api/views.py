@@ -30,6 +30,7 @@ def get_token(request):
     if serializer.is_valid():
         data = {'token': serializer.data.get('token')}
         return Response(data, status=status.HTTP_200_OK)
+    return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 
 class RegisterView(generics.CreateAPIView):
@@ -70,9 +71,8 @@ class AdminViewSet(viewsets.ModelViewSet):
                 serializer.errors,
                 status=status.HTTP_400_BAD_REQUEST
             )
-        if request.method == 'DELETE':
-            user.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
+        user.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class UserView(APIView):
@@ -165,5 +165,4 @@ class ReviewViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         title_id = self.kwargs.get('title_id')
-        if get_object_or_404(Title, pk=title_id):
-            return Review.objects.filter(title=title_id)
+        return Review.objects.filter(title=title_id)

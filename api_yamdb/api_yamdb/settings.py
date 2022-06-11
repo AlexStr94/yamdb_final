@@ -19,7 +19,7 @@ DEBUG = False
 ALLOWED_HOSTS = os.getenv(
     'SERVERNAMES',
     default='localhost 127.0.0.1 [::1] testserver web',
-    ).split(' ')
+).split(' ')
 
 INSTALLED_APPS = [
     'users.apps.UsersConfig',

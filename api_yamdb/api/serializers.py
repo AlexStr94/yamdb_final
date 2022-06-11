@@ -58,6 +58,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             email=email,
             confirmation_code=confirmation_code
         )
+        print(user)
         return user
 
 
